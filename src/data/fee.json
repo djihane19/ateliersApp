@@ -1,0 +1,438 @@
+{
+    "Tarifs de Livraison": {
+      "Prix de livraison pour l'échange": [
+        {
+          "N°": 1,
+          "WILAYA": "Adrar",
+          "PRIX A DOMICILE": "1000 DA",
+          "PRIX STOPDESK": "700 DA",
+          "PRIX ECHG DMC": "1200 DA",
+          "PRIX ECHG SD": "900 DA"
+        },
+        {
+          "N°": 2,
+          "WILAYA": "Chlef",
+          "PRIX A DOMICILE": "600 DA",
+          "PRIX STOPDESK": "400 DA",
+          "PRIX ECHG DMC": "850 DA",
+          "PRIX ECHG SD": "450 DA"
+        },
+        {
+          "N°": 3,
+          "WILAYA": "Laghouat",
+          "PRIX A DOMICILE": "700 DA",
+          "PRIX STOPDESK": "400 DA",
+          "PRIX ECHG DMC": "950 DA",
+          "PRIX ECHG SD": "550 DA"
+        },
+        {
+          "N°": 4,
+          "WILAYA": "Oum El Bouaghi",
+          "PRIX A DOMICILE": "600 DA",
+          "PRIX STOPDESK": "400 DA",
+          "PRIX ECHG DMC": "850 DA",
+          "PRIX ECHG SD": "450 DA"
+        },
+        {
+          "N°": 5,
+          "WILAYA": "Batna",
+          "PRIX A DOMICILE": "700 DA",
+          "PRIX STOPDESK": "400 DA",
+          "PRIX ECHG DMC": "900 DA",
+          "PRIX ECHG SD": "450 DA"
+        },
+        {
+          "N°": 6,
+          "WILAYA": "Béjaia",
+          "PRIX A DOMICILE": "600 DA",
+          "PRIX STOPDESK": "400 DA",
+          "PRIX ECHG DMC": "800 DA",
+          "PRIX ECHG SD": "450 DA"
+        },
+        {
+          "N°": 7,
+          "WILAYA": "Biskra",
+          "PRIX A DOMICILE": "700 DA",
+          "PRIX STOPDESK": "500 DA",
+          "PRIX ECHG DMC": "950 DA",
+          "PRIX ECHG SD": "550 DA"
+        },
+        {
+          "N°": 8,
+          "WILAYA": "Béchar",
+          "PRIX A DOMICILE": "800 DA",
+          "PRIX STOPDESK": "400 DA",
+          "PRIX ECHG DMC": "1000 DA",
+          "PRIX ECHG SD": "650 DA"
+        },
+        {
+          "N°": 9,
+          "WILAYA": "Blida",
+          "PRIX A DOMICILE": "600 DA",
+          "PRIX STOPDESK": "400 DA",
+          "PRIX ECHG DMC": "650 DA",
+          "PRIX ECHG SD": "400 DA"
+        },
+        {
+          "N°": 10,
+          "WILAYA": "Bouira",
+          "PRIX A DOMICILE": "600 DA",
+          "PRIX STOPDESK": "400 DA",
+          "PRIX ECHG DMC": "750 DA",
+          "PRIX ECHG SD": "450 DA"
+        },
+        {
+          "N°": 11,
+          "WILAYA": "Tamanrasset",
+          "PRIX A DOMICILE": "1300 DA",
+          "PRIX STOPDESK": "800 DA",
+          "PRIX ECHG DMC": "1500 DA",
+          "PRIX ECHG SD": "1050 DA"
+        },
+        {
+          "N°": 12,
+          "WILAYA": "Tébessa",
+          "PRIX A DOMICILE": "700 DA",
+          "PRIX STOPDESK": "400 DA",
+          "PRIX ECHG DMC": "900 DA",
+          "PRIX ECHG SD": "450 DA"
+        },
+        {
+          "N°": 13,
+          "WILAYA": "Tlemcen",
+          "PRIX A DOMICILE": "700 DA",
+          "PRIX STOPDESK": "400 DA",
+          "PRIX ECHG DMC": "900 DA",
+          "PRIX ECHG SD": "500 DA"
+        },
+        {
+          "N°": 14,
+          "WILAYA": "Tiaret",
+          "PRIX A DOMICILE": "600 DA",
+          "PRIX STOPDESK": "400 DA",
+          "PRIX ECHG DMC": "850 DA",
+          "PRIX ECHG SD": "450 DA"
+        },
+        {
+          "N°": 15,
+          "WILAYA": "Tizi-Ouzou",
+          "PRIX A DOMICILE": "600 DA",
+          "PRIX STOPDESK": "400 DA",
+          "PRIX ECHG DMC": "750 DA",
+          "PRIX ECHG SD": "450 DA"
+        },
+        {
+          "N°": 16,
+          "WILAYA": "Alger",
+          "PRIX A DOMICILE": "400 DA",
+          "PRIX STOPDESK": "300 DA",
+          "PRIX ECHG DMC": "400 DA",
+          "PRIX ECHG SD": "300 DA"
+        },
+        {
+          "N°": 17,
+          "WILAYA": "Djelfa",
+          "PRIX A DOMICILE": "700 DA",
+          "PRIX STOPDESK": "400 DA",
+          "PRIX ECHG DMC": "950 DA",
+          "PRIX ECHG SD": "500 DA"
+        },
+        {
+          "N°": 18,
+          "WILAYA": "Jijel",
+          "PRIX A DOMICILE": "700 DA",
+          "PRIX STOPDESK": "400 DA",
+          "PRIX ECHG DMC": "900 DA",
+          "PRIX ECHG SD": "450 DA"
+        },
+        {
+          "N°": 19,
+          "WILAYA": "Sétif",
+          "PRIX A DOMICILE": "600 DA",
+          "PRIX STOPDESK": "400 DA",
+          "PRIX ECHG DMC": "800 DA",
+          "PRIX ECHG SD": "450 DA"
+        },
+        {
+          "N°": 20,
+          "WILAYA": "Saida",
+          "PRIX A DOMICILE": "700 DA",
+          "PRIX STOPDESK": "400 DA",
+          "PRIX ECHG DMC": "900 DA",
+          "PRIX ECHG SD": "550 DA"
+        },
+        {
+          "N°": 21,
+          "WILAYA": "Skikda",
+          "PRIX A DOMICILE": "700 DA",
+          "PRIX STOPDESK": "400 DA",
+          "PRIX ECHG DMC": "900 DA",
+          "PRIX ECHG SD": "450 DA"
+        },
+        {
+          "N°": 22,
+          "WILAYA": "Sidi Bel Abbés",
+          "PRIX A DOMICILE": "700 DA",
+          "PRIX STOPDESK": "400 DA",
+          "PRIX ECHG DMC": "900 DA",
+          "PRIX ECHG SD": "450 DA"
+        },
+        {
+          "N°": 23,
+          "WILAYA": "Annaba",
+          "PRIX A DOMICILE": "600 DA",
+          "PRIX STOPDESK": "400 DA",
+          "PRIX ECHG DMC": "850 DA",
+          "PRIX ECHG SD": "450 DA"
+        },
+        {
+          "N°": 24,
+          "WILAYA": "Guelma",
+          "PRIX A DOMICILE": "700 DA",
+          "PRIX STOPDESK": "400 DA",
+          "PRIX ECHG DMC": "900 DA",
+          "PRIX ECHG SD": "450 DA"
+        },
+        {
+          "N°": 25,
+          "WILAYA": "Constantine",
+          "PRIX A DOMICILE": "600 DA",
+          "PRIX STOPDESK": "400 DA",
+          "PRIX ECHG DMC": "800 DA",
+          "PRIX ECHG SD": "450 DA"
+        },
+        {
+          "N°": 26,
+          "WILAYA": "Médéa",
+          "PRIX A DOMICILE": "600 DA",
+          "PRIX STOPDESK": "400 DA",
+          "PRIX ECHG DMC": "800 DA",
+          "PRIX ECHG SD": "450 DA"
+        },
+        {
+          "N°": 27,
+          "WILAYA": "Mostaganem",
+          "PRIX A DOMICILE": "700 DA",
+          "PRIX STOPDESK": "400 DA",
+          "PRIX ECHG DMC": "900 DA",
+          "PRIX ECHG SD": "450 DA"
+        },
+        {
+          "N°": 28,
+          "WILAYA": "Msila",
+          "PRIX A DOMICILE": "600 DA",
+          "PRIX STOPDESK": "400 DA",
+          "PRIX ECHG DMC": "850 DA",
+          "PRIX ECHG SD": "500 DA"
+        },
+        {
+          "N°": 29,
+          "WILAYA": "Mascara",
+          "PRIX A DOMICILE": "700 DA",
+          "PRIX STOPDESK": "400 DA",
+          "PRIX ECHG DMC": "900 DA",
+          "PRIX ECHG SD": "450 DA"
+        },
+        {
+          "N°": 30,
+          "WILAYA": "Ouargla",
+          "PRIX A DOMICILE": "700 DA",
+          "PRIX STOPDESK": "400 DA",
+          "PRIX ECHG DMC": "950 DA",
+          "PRIX ECHG SD": "600 DA"
+        },
+        {
+          "N°": 31,
+          "WILAYA": "Oran",
+          "PRIX A DOMICILE": "600 DA",
+          "PRIX STOPDESK": "400 DA",
+          "PRIX ECHG DMC": "800 DA",
+          "PRIX ECHG SD": "450 DA"
+        },
+        {
+          "N°": 32,
+          "WILAYA": "El Bayadh",
+          "PRIX A DOMICILE": "800 DA",
+          "PRIX STOPDESK": "400 DA",
+          "PRIX ECHG DMC": "1000 DA",
+          "PRIX ECHG SD": "600 DA"
+        },
+        {
+          "N°": 34,
+          "WILAYA": "Bordj Bou Arreridj",
+          "PRIX A DOMICILE": "600 DA",
+          "PRIX STOPDESK": "400 DA",
+          "PRIX ECHG DMC": "800 DA",
+          "PRIX ECHG SD": "450 DA"
+        },
+        {
+          "N°": 35,
+          "WILAYA": "Boumerdés",
+          "PRIX A DOMICILE": "600 DA",
+          "PRIX STOPDESK": "400 DA",
+          "PRIX ECHG DMC": "700 DA",
+          "PRIX ECHG SD": "400 DA"
+        },
+        {
+          "N°": 36,
+          "WILAYA": "El Tarf",
+          "PRIX A DOMICILE": "600 DA",
+          "PRIX STOPDESK": "400 DA",
+          "PRIX ECHG DMC": "850 DA",
+          "PRIX ECHG SD": "450 DA"
+        },
+        {
+          "N°": 38,
+          "WILAYA": "Tissemsilt",
+          "PRIX A DOMICILE": "800 DA",
+          "PRIX STOPDESK": "400 DA",
+          "PRIX ECHG DMC": "850 DA",
+          "PRIX ECHG SD": "450 DA"
+        },
+        {
+          "N°": 39,
+          "WILAYA": "El Oued",
+          "PRIX A DOMICILE": "700 DA",
+          "PRIX STOPDESK": "400 DA",
+          "PRIX ECHG DMC": "950 DA",
+          "PRIX ECHG SD": "600 DA"
+        },
+        {
+          "N°": 40,
+          "WILAYA": "Khenchela",
+          "PRIX A DOMICILE": "700 DA",
+          "PRIX STOPDESK": "400 DA",
+          "PRIX ECHG DMC": "900 DA",
+          "PRIX ECHG SD": "450 DA"
+        },
+        {
+          "N°": 41,
+          "WILAYA": "Souk-Ahras",
+          "PRIX A DOMICILE": "700 DA",
+          "PRIX STOPDESK": "400 DA",
+          "PRIX ECHG DMC": "900 DA",
+          "PRIX ECHG SD": "550 DA"
+        },
+        {
+          "N°": 42,
+          "WILAYA": "Tipaza",
+          "PRIX A DOMICILE": "600 DA",
+          "PRIX STOPDESK": "400 DA",
+          "PRIX ECHG DMC": "700 DA",
+          "PRIX ECHG SD": "450 DA"
+        },
+        {
+          "N°": 43,
+          "WILAYA": "Mila",
+          "PRIX A DOMICILE": "700 DA",
+          "PRIX STOPDESK": "400 DA",
+          "PRIX ECHG DMC": "900 DA",
+          "PRIX ECHG SD": "450 DA"
+        },
+        {
+          "N°": 44,
+          "WILAYA": "Ain Defla",
+          "PRIX A DOMICILE": "700 DA",
+          "PRIX STOPDESK": "400 DA",
+          "PRIX ECHG DMC": "900 DA",
+          "PRIX ECHG SD": "450 DA"
+        },
+        {
+          "N°": 45,
+          "WILAYA": "Naama",
+          "PRIX A DOMICILE": "800 DA",
+          "PRIX STOPDESK": "400 DA",
+          "PRIX ECHG DMC": "1000 DA",
+          "PRIX ECHG SD": "600 DA"
+        },
+        {
+          "N°": 46,
+          "WILAYA": "Ain Témouchent",
+          "PRIX A DOMICILE": "700 DA",
+          "PRIX STOPDESK": "400 DA",
+          "PRIX ECHG DMC": "900 DA",
+          "PRIX ECHG SD": "450 DA"
+        },
+        {
+          "N°": 47,
+          "WILAYA": "Ghardaia",
+          "PRIX A DOMICILE": "700 DA",
+          "PRIX STOPDESK": "400 DA",
+          "PRIX ECHG DMC": "950 DA",
+          "PRIX ECHG SD": "600 DA"
+        },
+        {
+          "N°": 48,
+          "WILAYA": "Relizane",
+          "PRIX A DOMICILE": "700 DA",
+          "PRIX STOPDESK": "400 DA",
+          "PRIX ECHG DMC": "900 DA",
+          "PRIX ECHG SD": "450 DA"
+        },
+        {
+          "N°": 49,
+          "WILAYA": "Timimoune",
+          "PRIX A DOMICILE": "1000 DA",
+          "PRIX STOPDESK": "XXXXXXX",
+          "PRIX ECHG DMC": "1250 DA",
+          "PRIX ECHG SD": "XXXXXX"
+        },
+        {
+          "N°": 51,
+          "WILAYA": "Ouled Djellal",
+          "PRIX A DOMICILE": "700 DA",
+          "PRIX STOPDESK": "400 DA",
+          "PRIX ECHG DMC": "950 DA",
+          "PRIX ECHG SD": "550 DA"
+        },
+        {
+          "N°": 52,
+          "WILAYA": "Béni Abbés",
+          "PRIX A DOMICILE": "800 DA",
+          "PRIX STOPDESK": "XXXXXXX",
+          "PRIX ECHG DMC": "1000 DA",
+          "PRIX ECHG SD": "XXXXXX"
+        },
+        {
+          "N°": 53,
+          "WILAYA": "Ain Salah",
+          "PRIX A DOMICILE": "1300 DA",
+          "PRIX STOPDESK": "XXXXXXX",
+          "PRIX ECHG DMC": "1500 DA",
+          "PRIX ECHG SD": "XXXXXX"
+        },
+        {
+          "N°": 54,
+          "WILAYA": "Ain Guezzam",
+          "PRIX A DOMICILE": "1300 DA",
+          "PRIX STOPDESK": "XXXXXXX",
+          "PRIX ECHG DMC": "1500 DA",
+          "PRIX ECHG SD": "XXXXXX"
+        },
+        {
+          "N°": 55,
+          "WILAYA": "Touggourt",
+          "PRIX A DOMICILE": "700 DA",
+          "PRIX STOPDESK": "400 DA",
+          "PRIX ECHG DMC": "950 DA",
+          "PRIX ECHG SD": "600 DA"
+        },
+        {
+          "N°": 57,
+          "WILAYA": "El M'ghiar",
+          "PRIX A DOMICILE": "700 DA",
+          "PRIX STOPDESK": "XXXXXXX",
+          "PRIX ECHG DMC": "950 DA",
+          "PRIX ECHG SD": "XXXXXX"
+        },
+        {
+          "N°": 58,
+          "WILAYA": "El Menia",
+          "PRIX A DOMICILE": "800 DA",
+          "PRIX STOPDESK": "XXXXXXX",
+          "PRIX ECHG DMC": "1000 DA",
+          "PRIX ECHG SD": "XXXXXX"
+        }
+      ]
+    }
+  }
