@@ -3,7 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { ShopContext } from '../context/ShopContext';
 import { ChromePicker } from 'react-color';
 import supabase from '../../supabaseClient'; // Import Supabase client
-import placeholderImage from '../assets/placeholder.jpg'; // Import the placeholder image
+import placeholderImage from '../assets/placeholder.png'; // Import the placeholder image
 
 const AddEditProduct = () => {
   const { productId } = useParams(); // Get product ID from URL

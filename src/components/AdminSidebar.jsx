@@ -15,13 +15,13 @@ import supabase from '../../supabaseClient'; // Import Supabase client
 
 const AdminSidebar = () => {
   const navigate = useNavigate();
-  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   const handleLogout = async () => {
     try {
       // Sign out with Supabase
       const { error } = await supabase.auth.signOut();
-      if (error) {
+      if (error) {  
         throw error;
       }
       navigate('/admin/login'); // Redirect to the login page
@@ -35,43 +35,40 @@ const AdminSidebar = () => {
   const ChevronIcon = isSidebarOpen ? FiChevronLeft : FiChevronRight;
 
   return (
-    <div className="flex">
-      {/* Sidebar */}
-      <div 
-        className={`${sidebarWidth} bg-gray-800 text-white h-screen transition-all duration-300 flex flex-col`}
+    <div 
+      className={`${sidebarWidth} bg-gray-800 text-white h-screen fixed top-0 left-0 transition-all duration-300 flex flex-col z-50`}
+    >
+      {/* Toggle Button */}
+      <button 
+        onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+        className="p-2 hover:bg-gray-700 rounded-lg self-end m-2"
       >
-        {/* Toggle Button */}
-        <button 
-          onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-          className="p-2 hover:bg-gray-700 rounded-lg self-end m-2"
+        <ChevronIcon className="h-6 w-6" />
+      </button>
+
+      {/* Logo/Title */}
+      <h1 className={`text-2xl font-bold px-4 mb-6 ${!isSidebarOpen && 'hidden'}`}>
+        Admin Panel
+      </h1>
+
+      {/* Menu Items */}
+      <ul className="flex-1">
+        <NavItem to="/admin/dashboard" icon={<FiHome />} text="Tableau de bord" isSidebarOpen={isSidebarOpen} />
+        <NavItem to="/admin/orders" icon={<FiShoppingBag />} text="Commandes" isSidebarOpen={isSidebarOpen} />
+        <NavItem to="/admin/products" icon={<FiBox />} text="Produits" isSidebarOpen={isSidebarOpen} />
+        <NavItem to="/admin/notifications" icon={<FiBell />} text="Notifications" isSidebarOpen={isSidebarOpen} />
+        <NavItem to="/admin/settings" icon={<FiSettings />} text="Paramètres" isSidebarOpen={isSidebarOpen} />
+      </ul>
+
+      {/* Logout Button */}
+      <div className="p-4 border-t border-gray-700">
+        <button
+          onClick={handleLogout}
+          className="w-full flex items-center gap-3 p-2 rounded-lg hover:bg-gray-700 transition"
         >
-          <ChevronIcon className="h-6 w-6" />
+          <FiLogOut className="h-6 w-6" />
+          <span className={`${!isSidebarOpen && 'hidden'}`}>Déconnexion</span>
         </button>
-
-        {/* Logo/Title */}
-        <h1 className={`text-2xl font-bold px-4 mb-6 ${!isSidebarOpen && 'hidden'}`}>
-          Admin Panel
-        </h1>
-
-        {/* Menu Items */}
-        <ul className="flex-1">
-          <NavItem to="/admin/dashboard" icon={<FiHome />} text="Tableau de bord" isSidebarOpen={isSidebarOpen} />
-          <NavItem to="/admin/orders" icon={<FiShoppingBag />} text="Commandes" isSidebarOpen={isSidebarOpen} />
-          <NavItem to="/admin/products" icon={<FiBox />} text="Produits" isSidebarOpen={isSidebarOpen} />
-          <NavItem to="/admin/notifications" icon={<FiBell />} text="Notifications" isSidebarOpen={isSidebarOpen} />
-          <NavItem to="/admin/settings" icon={<FiSettings />} text="Paramètres" isSidebarOpen={isSidebarOpen} />
-        </ul>
-
-        {/* Logout Button */}
-        <div className="p-4 border-t border-gray-700">
-          <button
-            onClick={handleLogout}
-            className="w-full flex items-center gap-3 p-2 rounded-lg hover:bg-gray-700 transition"
-          >
-            <FiLogOut className="h-6 w-6" />
-            <span className={`${!isSidebarOpen && 'hidden'}`}>Déconnexion</span>
-          </button>
-        </div>
       </div>
     </div>
   );
@@ -94,4 +91,4 @@ const NavItem = ({ to, icon, text, isSidebarOpen }) => (
   </li>
 );
 
-export default AdminSidebar;
+export default AdminSidebar;  

@@ -45,7 +45,7 @@ const OurPolicy = () => {
       >
         <FaCreditCard style={{ width: '36px', height: '36px', marginBottom: '1rem', color: '#ff6f61' }} />
         <p style={{ fontWeight: '600', fontSize: '1.125rem', marginBottom: '0.5rem' }}>دفع آمن</p>
-        <p style={{ color: '#4a5568', fontSize: '0.875rem' }}>ادفع عند الاستلام أو عبر الإنترنت بشكل آمن.</p>
+        <p dir="rtl" style={{ color: '#4a5568', fontSize: '0.875rem' }}>ادفع عند الاستلام أو عبر الإنترنت بشكل آمن.</p>
       </div>
 
       {/* Politique 3 : Qualité Garantie */}
@@ -62,7 +62,7 @@ const OurPolicy = () => {
       >
         <FaShieldAlt style={{ width: '36px', height: '36px', marginBottom: '1rem', color: '#ff6f61' }} />
         <p style={{ fontWeight: '600', fontSize: '1.125rem', marginBottom: '0.5rem' }}>جودة مضمونة</p>
-        <p style={{ color: '#4a5568', fontSize: '0.875rem' }}>منتجات عالية الجودة، مختارة بعناية من أجلك.</p>
+        <p dir="rtl" style={{ color: '#4a5568', fontSize: '0.875rem' }}>منتجات عالية الجودة، مختارة بعناية من أجلك.</p>
       </div>
 
       {/* Politique 4 : Support Client */}

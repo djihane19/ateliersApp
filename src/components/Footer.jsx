@@ -35,10 +35,10 @@ const Footer = () => {
   <div className='space-y-6'>
     <img src={assets.logo1} className='w-32 mb-5 transition-transform hover:scale-105' alt="Logo" />
     <div className='space-y-4'>
-      <p className='w-full md:w-2/3 text-gray-600 leading-relaxed'>
+      <p className='w-full md:w-2/3 text-gray-600 leading-relaxed' dir="rtl">
         فيرا تجسد مزيجًا فريدًا من الأناقة الخالدة والابتكار العصري، حيث يلتقي الفن بالحرفية الراقية. في عالمنا، لكل أسلوب قصة تُروى بتفاصيل استثنائية.
       </p>
-      <p className='w-full md:w-2/3 text-gray-600 leading-relaxed'>
+      <p className='w-full md:w-2/3 text-gray-600 leading-relaxed' dir="rtl">
         كل قطعة في فيرا هي تحفة فنية مصممة لتلهمك، حيث تمتزج الفخامة بالأصالة، وتتحول الأزياء إلى تجربة تعكس شخصيتك الفريدة.
       </p>
     </div>
@@ -67,7 +67,7 @@ const Footer = () => {
       <hr className='border-gray-300 w-full my-6' /> {/* Ligne de séparation */}
 
       {/* Texte du footer */}
-      <p 
+      <p  dir="rtl"
         style={{ 
           fontSize: '0.875rem', 
           cursor: 'pointer', 
@@ -87,7 +87,7 @@ const Footer = () => {
           e.currentTarget.style.opacity = '0.8';
         }}
       >
-        صمم بواسطة <strong>T_djihane</strong>
+        صمم بواسطة <strong>TECKRINO</strong>
       </p>
 
       {/* Boîte de dialogue de contact */}

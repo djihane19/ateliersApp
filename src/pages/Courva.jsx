@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Title from '../components/Title';
 import supabase from '../../supabaseClient'; // Import Supabase client
-import placeholderImage from '../assets/placeholder.jpg'; // Import the placeholder image
+import placeholderImage from '../assets/placeholder.png'; // Import the placeholder image
 
 const Courva = () => {
   const [courvaProducts, setCourvaProducts] = useState([]);

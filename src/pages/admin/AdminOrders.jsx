@@ -6,7 +6,11 @@ const AdminOrders = () => {
   const [orders, setOrders] = useState([]);
   const [selectedAtelier, setSelectedAtelier] = useState('Mo Neat');
   const [loading, setLoading] = useState(true);
+  const [currentPage, setCurrentPage] = useState(1); // Pagination state
   const navigate = useNavigate();
+
+  // Constants
+  const ROWS_PER_PAGE = 5; // Number of rows to display per page
 
   // Fetch orders from Supabase
   useEffect(() => {
@@ -20,7 +24,10 @@ const AdminOrders = () => {
           throw error;
         }
 
-        setOrders(data || []);
+        // Sort orders by ID in descending order (most recent first)
+        const sortedData = data.sort((a, b) => b.id - a.id);
+
+        setOrders(sortedData || []);
       } catch (error) {
         console.error('Error fetching orders:', error.message);
         setOrders([]);
@@ -36,6 +43,12 @@ const AdminOrders = () => {
   const filteredOrders = selectedAtelier
     ? orders.filter((order) => order.atelier === selectedAtelier)
     : orders;
+
+  // Pagination logic
+  const totalPages = Math.ceil(filteredOrders.length / ROWS_PER_PAGE);
+  const startIndex = (currentPage - 1) * ROWS_PER_PAGE;
+  const endIndex = startIndex + ROWS_PER_PAGE;
+  const paginatedOrders = filteredOrders.slice(startIndex, endIndex);
 
   // Handle status change
   const updateOrderStatus = async (orderId, newStatus) => {
@@ -87,6 +100,11 @@ const AdminOrders = () => {
     }
   };
 
+  // Handle page change
+  const handlePageChange = (newPage) => {
+    setCurrentPage(newPage);
+  };
+
   if (loading) {
     return <div className='text-center py-10'>جاري التحميل...</div>;
   }
@@ -134,7 +152,7 @@ const AdminOrders = () => {
             </tr>
           </thead>
           <tbody>
-            {filteredOrders.map((order, index) => (
+            {paginatedOrders.map((order, index) => (
               <tr
                 key={order.id || index}
                 className={`${getRowBackgroundColor(order)} transition-colors`}
@@ -199,8 +217,29 @@ const AdminOrders = () => {
           </tbody>
         </table>
       </div>
+
+      {/* Pagination Controls */}
+      <div className='flex justify-center mt-6'>
+        <button
+          onClick={() => handlePageChange(currentPage - 1)}
+          disabled={currentPage === 1}
+          className='px-4 py-2 mx-1 border rounded-lg bg-gray-200 disabled:opacity-50'
+        >
+          Précédent
+        </button>
+        <span className='px-4 py-2 mx-1'>
+          Page {currentPage} sur {totalPages}
+        </span>
+        <button
+          onClick={() => handlePageChange(currentPage + 1)}
+          disabled={currentPage === totalPages}
+          className='px-4 py-2 mx-1 border rounded-lg bg-gray-200 disabled:opacity-50'
+        >
+          Suivant
+        </button>
+      </div>
     </div>
   );
 };
 
-export default AdminOrders;
+export default AdminOrders;   

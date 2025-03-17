@@ -133,6 +133,7 @@ const Navbar = () => {
             <p>رجوع</p>
           </div>
           <NavLink onClick={() => setVisible(false)} className='py-2 pl-6 border' to='/'>الرئيسية</NavLink>
+          <NavLink onClick={() => setVisible(false)} className='py-2 pl-6 border' to='/collection'> المجموعات </NavLink>
           <NavLink onClick={() => setVisible(false)} className='py-2 pl-6 border' to='/contact'>اتصل بنا</NavLink>
           {/* Conditionally render Admin NavLink in mobile sidebar */}
           {isAdminLoggedIn && (

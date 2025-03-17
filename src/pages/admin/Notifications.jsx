@@ -20,7 +20,10 @@ const Notifications = () => {
           throw error;
         }
 
-        setNotifications(data || []);
+        // Sort orders by ID in descending order (most recent first)
+        const sortedData = data.sort((a, b) => b.id - a.id);
+
+        setNotifications(sortedData || []);
       } catch (error) {
         console.error('Error fetching orders:', error.message);
         setNotifications([]);
@@ -113,4 +116,4 @@ const Notifications = () => {
   );
 };
 
-export default Notifications;
+export default Notifications;  
