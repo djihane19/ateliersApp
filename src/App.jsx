@@ -40,7 +40,7 @@ const App = () => {
     <AdminProvider>
       <div className='px-4 sm:px-[5vw] md:px-[7vw] lg:px-[9vw]'>
         {/* Conditionally render Navbar */}
-        {!isAdminRoute &&<Navbar />}
+        {!isAdminRoute &&<Navbar />}  
 
         {/* Wrap Routes in Suspense for lazy loading */}
         <Suspense fallback={<div>Loading...</div>}>

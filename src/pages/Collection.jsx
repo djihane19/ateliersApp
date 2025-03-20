@@ -72,124 +72,116 @@ const Collection = () => {
   const sortedProducts = sortProducts(filteredProducts, sortOrder);
 
   return (
-    <div className='flex flex-col sm:flex-row gap-6 sm:gap-8 pt-10 border-t'>
-      {/* Filter Options */}
-      <div className='min-w-60'>
-        {/* Filter Button */}
-        <button
-          className='w-full p-3 text-gray-700 flex items-center justify-between hover:text-gray-900 transition-colors'
-          onClick={() => setShowFilter(!showFilter)}
-        >
-          <span className='font-medium'>تصفية</span>
-          {/* Up/Down Arrow Icon 
-          <svg
-            xmlns='http://www.w3.org/2000/svg'
-            className={`h-5 w-5 transform ${showFilter ? 'rotate-180' : ''} transition-transform`}
-            viewBox='0 0 20 20'
-            fill='currentColor'
+    <div className='flex flex-col gap-6 sm:gap-8 pt-10 border-t' dir="rtl">
+      {/* Title and Sorting Filter */}
+      <div className='flex justify-between items-center w-full mb-6 px-4 sm:px-0'>
+        <h1 className='text-xl sm:text-2xl font-bold text-gray-900'>مجموعة المنتجات</h1> {/* Responsive title */}
+        <div className='flex items-center'>
+          <select
+            className='p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 transition-all duration-200'
+            value={sortOrder}
+            onChange={(e) => setSortOrder(e.target.value)}
           >
-            <path
-              fillRule='evenodd'
-              d='M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z'
-              clipRule='evenodd'
-            />
-          </svg>*/}
-          {/* Alternatively, use a Filter/Parameter Icon */}
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-5 w-5"
-            viewBox="0 0 20 20"
-            fill="currentColor" 
-          >
-            <path
-              fillRule="evenodd"
-              d="M3 3a1 1 0 011-1h12a1 1 0 011 1v3a1 1 0 01-.293.707L12 11.414V15a1 1 0 01-.293.707l-2 2A1 1 0 018 17v-5.586L3.293 6.707A1 1 0 013 6V3z"
-              clipRule="evenodd"
-            />
-          </svg> 
-        </button>
-
-        {/* Sorting Filter */}
-        <div className={`border border-gray-200 p-5 mt-6 rounded-lg bg-white shadow-sm ${showFilter ? '' : 'hidden'} sm:block`}>
-          <p className='mb-3 text-sm font-medium text-gray-700'>ترتيب حسب</p>
-          <div className='flex flex-col gap-2 text-sm font-light text-gray-700'>
-            <select
-              className='w-full p-2 border border-gray-300 rounded-lg mr-2 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500'
-              value={sortOrder}
-              onChange={(e) => setSortOrder(e.target.value)}
-            >
-              <option value='newToOld'>الأحدث إلى الأقدم</option>
-              <option value='oldToNew'>الأقدم إلى الأحدث</option>
-              <option value='priceHighToLow'>السعر من الأعلى إلى الأدنى</option>
-              <option value='priceLowToHigh'>السعر من الأدنى إلى الأعلى</option>
-            </select>
-          </div>
-        </div>
-
-        {/* Atelier Filter */}
-        <div className={`border border-gray-200 p-5 mt-6 rounded-lg bg-white shadow-sm ${showFilter ? '' : 'hidden'} sm:block`}>
-          <p className='mb-3 text-sm font-medium text-gray-700'>المتجر</p>
-          <div className='flex flex-col gap-2 text-sm font-light text-gray-700'>
-            {ateliers.map((atelier, index) => (
-              <p key={index} className='flex gap-2'>
-                <input
-                  type='checkbox'
-                  className='w-4 h-4 accent-gray-700'
-                  value={atelier}
-                  checked={selectedAtelier === atelier}
-                  onChange={() => setSelectedAtelier(atelier)}
-                />
-                {atelier}
-              </p>
-            ))}
-          </div>
-        </div>
-
-        {/* Category Filter */}
-        <div className={`border border-gray-200 p-5 mt-6 rounded-lg bg-white shadow-sm ${showFilter ? '' : 'hidden'} sm:block`}>
-          <p className='mb-3 text-sm font-medium text-gray-700'>الفئة</p>
-          <div className='flex flex-col gap-2 text-sm font-light text-gray-700'>
-            <p className='flex gap-2'>
-              <input
-                type='checkbox'
-                className='w-4 h-4 accent-gray-700'
-                value='Hommes'
-                checked={selectedCategory === 'Hommes'}
-                onChange={() => setSelectedCategory('Hommes')}
-              />
-              رجال
-            </p>
-            <p className='flex gap-2'>
-              <input
-                type='checkbox'
-                className='w-4 h-4 accent-gray-700'
-                value='Femmes'
-                checked={selectedCategory === 'Femmes'}
-                onChange={() => setSelectedCategory('Femmes')}
-              />
-              نساء
-            </p>
-          </div>
+            <option value='newToOld'>الأحدث إلى الأقدم</option>
+            <option value='oldToNew'>الأقدم إلى الأحدث</option>
+            <option value='priceHighToLow'>السعر من الأعلى إلى الأدنى</option>
+            <option value='priceLowToHigh'>السعر من الأدنى إلى الأعلى</option>
+          </select>
         </div>
       </div>
 
-      {/* Product List */}
-      <div className='flex-1'>
-        <div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4'>
-          {sortedProducts.map((item, index) => (
-            <ProductItem
-              key={index}
-              id={item.id} // Use `id` from Supabase
-              image={item.image}
-              price={item.price}
-              name={item.name}
-              atelier={item.atelier}
-            />
-          ))}
+      {/* Main Content */}
+      <div className='flex flex-col sm:flex-row gap-6 sm:gap-8'>
+        {/* Filter Options */}
+        <div className='min-w-60'>
+          {/* Filter Button */}
+          <button
+            className='w-full p-3 text-gray-700 flex items-center justify-between hover:bg-gray-50 rounded-lg transition-all duration-200 sm:hidden'
+            onClick={() => setShowFilter(!showFilter)}
+          >
+            <span className='font-medium'>تصفية</span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-5 w-5"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+            >
+              <path
+                fillRule="evenodd"
+                d="M3 3a1 1 0 011-1h12a1 1 0 011 1v3a1 1 0 01-.293.707L12 11.414V15a1 1 0 01-.293.707l-2 2A1 1 0 018 17v-5.586L3.293 6.707A1 1 0 013 6V3z"
+                clipRule="evenodd"
+              />
+            </svg>
+          </button>
+
+          {/* Filter Options Container */}
+          <div className={`${showFilter ? 'block' : 'hidden'} sm:block`}>
+            {/* Atelier Filter */}
+            <div className='border border-gray-200 p-5 mt-6 rounded-lg bg-white shadow-sm'>
+              <p className='mb-3 text-sm font-medium text-gray-700'>المتجر</p>
+              <div className='flex flex-col gap-2 text-sm font-light text-gray-700'>
+                {ateliers.map((atelier, index) => (
+                  <p key={index} className='flex gap-2'>
+                    <input
+                      type='checkbox'
+                      className='w-4 h-4 accent-gray-700'
+                      value={atelier}
+                      checked={selectedAtelier === atelier}
+                      onChange={() => setSelectedAtelier(atelier)}
+                    />
+                    {atelier}
+                  </p>
+                ))}
+              </div>
+            </div>
+
+            {/* Category Filter */}
+            <div className='border border-gray-200 p-5 mt-6 rounded-lg bg-white shadow-sm'>
+              <p className='mb-3 text-sm font-medium text-gray-700'>الفئة</p>
+              <div className='flex flex-col gap-2 text-sm font-light text-gray-700'>
+                <p className='flex gap-2'>
+                  <input
+                    type='checkbox'
+                    className='w-4 h-4 accent-gray-700'
+                    value='Hommes'
+                    checked={selectedCategory === 'Hommes'}
+                    onChange={() => setSelectedCategory('Hommes')}
+                  />
+                  رجال
+                </p>
+                <p className='flex gap-2'>
+                  <input
+                    type='checkbox'
+                    className='w-4 h-4 accent-gray-700'
+                    value='Femmes'
+                    checked={selectedCategory === 'Femmes'}
+                    onChange={() => setSelectedCategory('Femmes')}
+                  />
+                  نساء
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Product List */}
+        <div className='flex-1'>
+          <div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4'>
+            {sortedProducts.map((item, index) => (
+              <ProductItem
+                key={index}
+                id={item.id} // Use `id` from Supabase
+                image={item.image}
+                price={item.price}
+                name={item.name}
+                atelier={item.atelier}
+              />
+            ))}
+          </div>
         </div>
       </div>
     </div>
   );
 };
 
-export default Collection;
+export default Collection;  
