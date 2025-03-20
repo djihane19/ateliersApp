@@ -46,15 +46,19 @@ const OrderDetails = () => {
   }
 
   return (
-    <div className='p-6'>
-      <h1 className='text-3xl font-bold mb-6'>Détails de la commande #{order.id}</h1>
+    <div className='p-4 sm:p-6' >
+      <h1 className='text-2xl sm:text-3xl font-bold mb-4 sm:mb-6'>
+        Détails de la commande #{order.id}
+      </h1>
 
-      <div className='bg-white rounded-lg shadow-md p-6'>
-        <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
+      <div className='bg-white rounded-lg shadow-md p-4 sm:p-6'>
+        <div className='grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6'>
           {/* Client Information */}
           <div>
-            <h2 className='text-xl font-semibold mb-4'>Informations client</h2>
-            <div className='space-y-2'>
+            <h2 className='text-lg sm:text-xl font-semibold mb-2 sm:mb-4'>
+              Informations client
+            </h2>
+            <div className='space-y-1 sm:space-y-2 text-sm sm:text-base'>
               <p><strong>Nom:</strong> {order.client.firstName} {order.client.lastName}</p>
               <p><strong>Téléphone:</strong> {order.client.phone}</p>
               <p><strong>Wilaya:</strong> {order.client.wilaya}</p>
@@ -67,8 +71,10 @@ const OrderDetails = () => {
 
           {/* Order Details */}
           <div>
-            <h2 className='text-xl font-semibold mb-4'>Détails de la commande</h2>
-            <div className='space-y-2'>
+            <h2 className='text-lg sm:text-xl font-semibold mb-2 sm:mb-4'>
+              Détails de la commande
+            </h2>
+            <div className='space-y-1 sm:space-y-2 text-sm sm:text-base'>
               <p><strong>Atelier:</strong> {order.atelier}</p>
               <p><strong>Statut:</strong> {order.status}</p>
               <p><strong>Frais de livraison:</strong> {order.deliveryFee} DA</p>
@@ -78,25 +84,27 @@ const OrderDetails = () => {
         </div>
 
         {/* Products List */}
-        <div className='mt-8'>
-          <h2 className='text-xl font-semibold mb-4'>Produits commandés</h2>
+        <div className='mt-6 sm:mt-8'>
+          <h2 className='text-lg sm:text-xl font-semibold mb-2 sm:mb-4'>
+            Produits commandés
+          </h2>
           {order.products.map((product, index) => (
-            <div key={index} className='border-b py-4'>
-              <div className='flex items-start gap-4'>
+            <div key={index} className='border-b py-2 sm:py-4'>
+              <div className='flex items-start gap-2 sm:gap-4'>
                 <img
                   src={product.image || 'https://via.placeholder.com/150'} // Fallback to a placeholder image
                   alt={product.name}
-                  className='w-24 h-24 object-cover rounded-lg'
+                  className='w-16 h-16 sm:w-24 sm:h-24 object-cover rounded-lg'
                 />
                 <div className='flex-1'>
-                  <h3 className='text-lg font-semibold'>{product.name}</h3>
-                  <p className='text-gray-600'>{product.price} DA</p>
-                  <div className='text-sm text-gray-500'>
+                  <h3 className='text-base sm:text-lg font-semibold'>{product.name}</h3>
+                  <p className='text-gray-600 text-sm sm:text-base'>{product.price} DA</p>
+                  <div className='text-xs sm:text-sm text-gray-500'>
                     <p>Taille: {product.size}</p>
-                    <div className='flex items-center gap-2'>
+                    <div className='flex items-center gap-1 sm:gap-2'>
                       <p>Couleur:</p>
                       <div
-                        className='w-4 h-4 rounded-full border border-gray-300'
+                        className='w-3 h-3 sm:w-4 sm:h-4 rounded-full border border-gray-300'
                         style={{ backgroundColor: product.color }}
                       />
                     </div>
@@ -114,4 +122,4 @@ const OrderDetails = () => {
   );
 };
 
-export default OrderDetails;
+export default OrderDetails;  

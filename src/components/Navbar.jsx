@@ -23,8 +23,13 @@ const Navbar = () => {
       product.description.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
+  // Function to close the search bar when a product is clicked
+  const handleProductClick = () => {
+    setShowSearchBar(false);
+  };
+
   return (
-    <div className='flex items-center justify-between py-5 font-medium'>
+    <div className='flex items-center justify-between py-5 font-medium relative z-50'>
       <Link to='/'>
         <img src={assets.logo1} className="w-36" alt="" />
       </Link>
@@ -59,13 +64,13 @@ const Navbar = () => {
             onClick={() => setShowSearchBar(!showSearchBar)}
           />
           {showSearchBar && (
-            <div className='absolute top-10 right-0 bg-white p-4 shadow-lg rounded-lg w-64'>
+            <div className='absolute top-10 right-0 bg-white p-4 shadow-lg rounded-lg w-64 sm:w-64 transform -translate-x-1/2 left-1/2'>
               <input
                 type='text'
                 placeholder='ابحث عن منتج...'
                 value={searchQuery}
                 onChange={handleSearch}
-                className='w-full p-2 border rounded-lg'
+                className='w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-500'
               />
               {/* Display search results */}
               {searchQuery && (
@@ -76,6 +81,7 @@ const Navbar = () => {
                         key={product.id} // Use `id` instead of `_id` for Supabase
                         to={`/product/${product.id}`} // Use `id` instead of `_id`
                         className='block p-2 hover:bg-gray-100 rounded-lg'
+                        onClick={handleProductClick} // Close search bar on product click
                       >
                         <div className='font-medium'>{product.name}</div>
                         <div className='text-sm text-gray-500'>
@@ -126,7 +132,11 @@ const Navbar = () => {
       </div>
 
       {/* Mobile Sidebar */}
-      <div className={`absolute top-0 right-0 bottom-0 overflow-hidden bg-white transition-all ${visible ? 'w-full' : 'w-0'}`}>
+      <div
+        className={`fixed top-0 right-0 bottom-0 overflow-hidden bg-white transition-all ${
+          visible ? 'w-full' : 'w-0'
+        } z-50`} // Added z-50 to ensure it appears above other components
+      >
         <div className='flex flex-col text-gray-600'>
           <div onClick={() => setVisible(false)} className='flex items-center gap-4 p-3 cursor-pointer'>
             <img className='h-4 rotate-90' src={assets.dropdown} alt="" />
@@ -145,4 +155,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;  
+export default Navbar;

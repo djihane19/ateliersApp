@@ -10,11 +10,11 @@ const Hero = () => {
   const ateliers = [
     {
       id: 1,
-      name: "Mo Neat",
-      link: "Mo-neat", // Lien pour Mo Neat
+      name: "Rayma",
+      link: "Rayma", // Lien pour Rayma
       description: {
-        fr: "Élégance Classique pour Vos Tenues Quotidiennes",
-        ar: "الأناقة الكلاسيكية لملابسك اليومية"
+        fr: "Robes de Soirée pour des Moments Inoubliables",
+        ar: "فساتين السهرة لحظات لا تُنسى"
       },
       photos: [assets.img1, assets.img2, assets.img3] // Remplacez par vos images
     },
@@ -27,16 +27,6 @@ const Hero = () => {
         ar: "الأداء والأناقة لحياة نشطة"
       },
       photos: [assets.img4, assets.img5, assets.img6] // Remplacez par vos images
-    },
-    {
-      id: 3,
-      name: "Rayma",
-      link: "Rayma", // Lien pour Rayma
-      description: {
-        fr: "Robes de Soirée pour des Moments Inoubliables",
-        ar: "فساتين السهرة لحظات لا تُنسى"
-      },
-      photos: [assets.img7, assets.img8, assets.img9] // Remplacez par vos images
     }
   ];
 

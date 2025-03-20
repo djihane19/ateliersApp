@@ -15,8 +15,10 @@ import cart from './cart.png'
 import menu from './menu.png'
 import dropdown from './dropdown.png'
 import taille from './taille.jpg'
+import mesure from './mesure.png'
 
 export const assets ={
+    mesure,
     taille,
     logo1,
     user,

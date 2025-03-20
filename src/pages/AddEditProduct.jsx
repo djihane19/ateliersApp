@@ -183,7 +183,7 @@ const AddEditProduct = () => {
   const isFormValid = isHeightValid && isWidthValid;
 
   return (
-    <div className='p-6'>
+    <div className='p-6' div='rtl'>
       <h1 className='text-2xl font-bold mb-6'>{productId ? 'تعديل المنتج' : 'إضافة منتج'}</h1>
       <form onSubmit={handleSubmit}>
         {/* Name and Price */}
@@ -224,7 +224,6 @@ const AddEditProduct = () => {
               required
             >
               <option value=''>اختر ورشة</option>
-              <option value='Mo Neat'>Mo Neat</option>
               <option value='Courva'>Courva</option>
               <option value='Rayma'>Rayma</option>
             </select>
@@ -372,7 +371,7 @@ const AddEditProduct = () => {
 
         {/* Height */}
         <div className='mb-4'>
-          <label className='block text-sm font-medium mb-1'>الارتفاع</label>
+          <label className='block text-sm font-medium mb-1'>الطول </label>
           <input
             type='checkbox'
             name='height'
@@ -380,7 +379,7 @@ const AddEditProduct = () => {
             onChange={handleChange}
             className='mr-2'
           />
-          إضافة ارتفاع
+          إضافة طول
           {formData.height && (
             <input
               type='number'
@@ -388,7 +387,7 @@ const AddEditProduct = () => {
               value={formData.heightValue}
               onChange={handleChange}
               className='w-full p-2 border rounded-lg mt-2'
-              placeholder='أدخل الارتفاع'
+              placeholder='أدخل الطول'
               required
             />
           )}

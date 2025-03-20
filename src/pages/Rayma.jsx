@@ -66,18 +66,17 @@ const Rayma = () => {
       </div>
 
       {/* Display Rayma Products */}
-      <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6'>
+      <div className='grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4'>
         {raymaProducts.map((product, index) => (
           <div key={index} className='border rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow'>
             <img
               src={product.image?.[0] || placeholderImage} // Use the local placeholder image
               alt={product.name}
-              className='w-full h-64 object-cover'
+              className='w-full h-48 sm:h-64 object-cover'
             />
             <div className='p-4'>
-              <h3 className='text-xl font-semibold mb-2'>{product.name}</h3>
+              <h3 className='text-lg sm:text-xl font-semibold mb-2'>{product.name}</h3>
               <p className='text-gray-600 mb-2'>{product.price} دج</p>
-              <p className='text-sm text-gray-500 mb-4'>{product.description}</p>
               <button
                 onClick={() => handleBuyNow(product.id)} // Use `id` from Supabase
                 className='w-full bg-black text-white py-2 rounded-lg hover:bg-gray-800 transition'

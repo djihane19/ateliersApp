@@ -7,7 +7,7 @@ const NewsletterBox = () => {
     };
 
     return (
-        <div className='text-center py-12 bg-[#f8f8f8]'>
+        <div className='text-center py-12 bg-[#f8f8f8]' dir='rtl'>
             <p className='text-2xl font-medium text-gray-800'>اشترك الآن</p>
             <p className='text-gray-400 mt-3'>كن أول من يعرف عند وصول منتجات جديدة</p>
             <form 

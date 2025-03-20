@@ -4,7 +4,7 @@ import supabase from '../../../supabaseClient'; // Import Supabase client
 
 const AdminOrders = () => {
   const [orders, setOrders] = useState([]);
-  const [selectedAtelier, setSelectedAtelier] = useState('Mo Neat');
+  const [selectedAtelier, setSelectedAtelier] = useState('Rayma');
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1); // Pagination state
   const navigate = useNavigate();
@@ -95,6 +95,8 @@ const AdminOrders = () => {
         return 'bg-purple-50 hover:bg-purple-100'; // Light purple
       case 'retour': // Retour (Returned)
         return 'bg-red-50 hover:bg-red-100'; // Light red
+      case 'annulée': // Annulée (Cancelled)
+        return 'bg-gray-200 hover:bg-gray-300'; // Light gray with line-through
       default:
         return 'bg-gray-50 hover:bg-gray-100'; // Default light gray
     }
@@ -119,8 +121,8 @@ const AdminOrders = () => {
   }
 
   return (
-    <div className='p-6'>
-      <h1 className='text-3xl font-bold mb-6'>Gestion des Commandes</h1>
+    <div className='p-4 sm:p-6'>
+      <h1 className='text-2xl sm:text-3xl font-bold mb-6'>Gestion des Commandes</h1>
 
       {/* Filter by Atelier */}
       <div className='mb-6'>
@@ -130,14 +132,14 @@ const AdminOrders = () => {
           onChange={(e) => setSelectedAtelier(e.target.value)}
           className='p-2 border rounded-lg'
         >
-          <option value='Mo Neat'>Mo Neat</option>
+         
           <option value='Courva'>Courva</option>
           <option value='Rayma'>Rayma</option>
         </select>
       </div>
 
-      {/* Orders Table */}
-      <div className='overflow-x-auto'>
+      {/* Orders Table (Desktop) */}
+      <div className='hidden sm:block overflow-x-auto'>
         <table className='min-w-full bg-white border border-gray-200'>
           <thead>
             <tr>
@@ -157,20 +159,24 @@ const AdminOrders = () => {
                 key={order.id || index}
                 className={`${getRowBackgroundColor(order)} transition-colors`}
               >
-                <td className='py-2 px-4 border-b text-center'>{order.id || `ORDER-${index + 1}`}</td>
-                <td className='py-2 px-4 border-b'>
+                <td className='py-2 px-4 border-b text-center' style={{ textDecoration: order.status === 'annulée' ? 'line-through' : 'none' }}>
+                  {order.id || `ORDER-${index + 1}`}
+                </td>
+                <td className='py-2 px-4 border-b' style={{ textDecoration: order.status === 'annulée' ? 'line-through' : 'none' }}>
                   <div className='flex flex-col'>
                     <span>{order.client.firstName} {order.client.lastName}</span>
                     <span className='text-sm text-gray-500'>{order.client.wilaya}, {order.client.commune}</span>
                   </div>
                 </td>
-                <td className='py-2 px-4 border-b text-center'>{order.client.phone}</td>
-                <td className='py-2 px-4 border-b text-center'>
+                <td className='py-2 px-4 border-b text-center' style={{ textDecoration: order.status === 'annulée' ? 'line-through' : 'none' }}>
+                  {order.client.phone}
+                </td>
+                <td className='py-2 px-4 border-b text-center' style={{ textDecoration: order.status === 'annulée' ? 'line-through' : 'none' }}>
                   {order.client.deliveryType === 'Stop Desk' 
                     ? order.client.stopDesk 
                     : order.client.address}
                 </td>
-                <td className='py-2 px-4 border-b'>
+                <td className='py-2 px-4 border-b' style={{ textDecoration: order.status === 'annulée' ? 'line-through' : 'none' }}>
                   {order.products.map((product, index) => (
                     <div key={index} className='mb-2'>
                       <div className='font-medium'>{product.name}</div>
@@ -190,7 +196,9 @@ const AdminOrders = () => {
                     </div>
                   ))}
                 </td>
-                <td className='py-2 px-4 border-b text-center'>{order.total} DA</td>
+                <td className='py-2 px-4 border-b text-center' style={{ textDecoration: order.status === 'annulée' ? 'line-through' : 'none' }}>
+                  {order.total} DA
+                </td>
                 <td className='py-2 px-4 border-b text-center'>
                   <select
                     value={order.status}
@@ -202,6 +210,7 @@ const AdminOrders = () => {
                     <option value='terminée'>Terminée</option>
                     <option value='livrée'>Livrée</option>
                     <option value='retour'>Retour</option>
+                    <option value='annulée'>Annulée</option>
                   </select>
                 </td>
                 <td className='py-2 px-4 border-b text-center'>
@@ -218,22 +227,88 @@ const AdminOrders = () => {
         </table>
       </div>
 
+      {/* Orders Cards (Mobile) */}
+      <div className='sm:hidden'>
+        {paginatedOrders.map((order, index) => (
+          <div
+            key={order.id || index}
+            className={`${getRowBackgroundColor(order)} p-4 mb-4 rounded-lg shadow-md`}
+          >
+            <div className='flex flex-col space-y-2'>
+              <div className='flex justify-between'>
+                <span className='font-bold'>ID:</span>
+                <span style={{ textDecoration: order.status === 'annulée' ? 'line-through' : 'none' }}>
+                  {order.id || `ORDER-${index + 1}`}
+                </span>
+              </div>
+              <div className='flex justify-between'>
+                <span className='font-bold'>Client:</span>
+                <span style={{ textDecoration: order.status === 'annulée' ? 'line-through' : 'none' }}>
+                  {order.client.firstName} {order.client.lastName}
+                </span>
+              </div>
+              <div className='flex justify-between'>
+                <span className='font-bold'>Contact:</span>
+                <span style={{ textDecoration: order.status === 'annulée' ? 'line-through' : 'none' }}>
+                  {order.client.phone}
+                </span>
+              </div>
+              <div className='flex justify-between'>
+                <span className='font-bold'>Adresse:</span>
+                <span style={{ textDecoration: order.status === 'annulée' ? 'line-through' : 'none' }}>
+                  {order.client.deliveryType === 'Stop Desk' 
+                    ? order.client.stopDesk 
+                    : order.client.address}
+                </span>
+              </div>
+              <div className='flex justify-between'>
+                <span className='font-bold'>Total:</span>
+                <span style={{ textDecoration: order.status === 'annulée' ? 'line-through' : 'none' }}>
+                  {order.total} DA
+                </span>
+              </div>
+              <div className='flex justify-between'>
+                <span className='font-bold'>Statut:</span>
+                <select
+                  value={order.status}
+                  onChange={(e) => updateOrderStatus(order.id, e.target.value)}
+                  className='p-1 border rounded-lg bg-inherit'
+                >
+                  <option value='en cours'>En cours</option>
+                  <option value='en livraison'>En livraison</option>
+                  <option value='terminée'>Terminée</option>
+                  <option value='livrée'>Livrée</option>
+                  <option value='retour'>Retour</option>
+                  <option value='annulée'>Annulée</option>
+                </select>
+              </div>
+              <button
+                onClick={() => handleViewDetails(order)}
+                className='text-blue-500 hover:text-blue-700 transition'
+              >
+                Voir détails
+              </button>
+            </div>
+          </div>
+        ))}
+      </div>
+
       {/* Pagination Controls */}
       <div className='flex justify-center mt-6'>
         <button
           onClick={() => handlePageChange(currentPage - 1)}
           disabled={currentPage === 1}
-          className='px-4 py-2 mx-1 border rounded-lg bg-gray-200 disabled:opacity-50'
+          className='px-4 py-1.5 mx-1 border rounded-lg bg-gray-200 disabled:opacity-50 text-sm'
         >
           Précédent
         </button>
-        <span className='px-4 py-2 mx-1'>
+        <span className='px-4 py-1.5 mx-1 text-sm'>
           Page {currentPage} sur {totalPages}
         </span>
         <button
           onClick={() => handlePageChange(currentPage + 1)}
           disabled={currentPage === totalPages}
-          className='px-4 py-2 mx-1 border rounded-lg bg-gray-200 disabled:opacity-50'
+          className='px-4 py-1.5 mx-1 border rounded-lg bg-gray-200 disabled:opacity-50 text-sm'
         >
           Suivant
         </button>
@@ -242,4 +317,4 @@ const AdminOrders = () => {
   );
 };
 
-export default AdminOrders;   
+export default AdminOrders;

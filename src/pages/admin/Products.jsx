@@ -70,12 +70,11 @@ const Products = () => {
   };
 
   // Filter products by atelier
-  const moNeatProducts = products.filter((p) => p.atelier === 'Mo Neat');
   const courvaProducts = products.filter((p) => p.atelier === 'Courva');
   const raymaProducts = products.filter((p) => p.atelier === 'Rayma');
 
   // Pagination logic for each atelier
-  const getPaginatedProducts = (atelierProducts) => {
+  const getPaginatedProducts = (atelierProducts) => {  
     const totalPages = Math.ceil(atelierProducts.length / ROWS_PER_PAGE);
     const startIndex = (currentPage - 1) * ROWS_PER_PAGE;
     const endIndex = startIndex + ROWS_PER_PAGE;
@@ -95,7 +94,7 @@ const Products = () => {
     const { paginatedProducts, totalPages } = getPaginatedProducts(atelierProducts);
 
     return (
-      <div className='mb-8' key={atelierName}>
+      <div className='mb-8' key={atelierName} dir="rtl">
         <div className='flex justify-between items-center mb-4'>
           <h2 className='text-xl font-bold'>{atelierName}</h2>
           <Link
@@ -107,7 +106,8 @@ const Products = () => {
           </Link>
         </div>
 
-        <div className='overflow-x-auto'>
+        {/* Desktop Table */}
+        <div className='overflow-x-auto hidden sm:block'>
           <table className='min-w-full bg-white border border-gray-200'>
             <thead>
               <tr>
@@ -151,6 +151,46 @@ const Products = () => {
               ))}
             </tbody>
           </table>
+          {paginatedProducts.length === 0 && (
+            <div className='text-center py-4 text-gray-500'>
+              لا توجد منتجات متاحة لـ {atelierName}
+            </div>
+          )}
+        </div>
+
+        {/* Mobile Cards */}
+        <div className='sm:hidden space-y-4'>
+          {paginatedProducts.map((product) => (
+            <div key={product.id} className='bg-white p-4 rounded-lg shadow-sm border border-gray-100'>
+              <div className='flex items-start gap-4'>
+                <img
+                  src={product.image?.[0] || 'https://via.placeholder.com/150'} // Fallback to a placeholder image
+                  alt={product.name}
+                  className='w-16 h-16 object-cover rounded-lg'
+                />
+                <div className='flex-1'>
+                  <h3 className='text-lg font-semibold'>{product.name}</h3>
+                  <p className='text-gray-600'>{product.price} دج</p>
+                  <p className='text-sm text-gray-500'>الفئة: {product.category}</p>
+                  <p className='text-sm text-gray-500'>الأحجام: {product.sizes?.join(', ') || 'N/A'}</p>
+                  <div className='mt-2 flex gap-2'>
+                    <button
+                      onClick={() => navigate(`/admin/products/edit/${product.id}`)}
+                      className='text-blue-500 hover:text-blue-700'
+                    >
+                      تعديل
+                    </button>
+                    <button
+                      onClick={() => handleDelete(product.id)}
+                      className='text-red-500 hover:text-red-700'
+                    >
+                      حذف
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
           {paginatedProducts.length === 0 && (
             <div className='text-center py-4 text-gray-500'>
               لا توجد منتجات متاحة لـ {atelierName}
@@ -202,14 +242,13 @@ const Products = () => {
   }
 
   return (
-    <div className='p-6'>
+    <div className='p-4 sm:p-6'>
       <h1 className='text-2xl font-bold mb-6'>إدارة المنتجات</h1>
 
-      {renderTable(moNeatProducts, 'Mo Neat')}
       {renderTable(courvaProducts, 'Courva')}
       {renderTable(raymaProducts, 'Rayma')}
     </div>
   );
 };
 
-export default Products;
+export default Products;  

@@ -20,7 +20,10 @@ const Dashboard = () => {
           throw error;
         }
 
-        setOrders(data || []);
+        // Sort orders by ID in descending order
+        const sortedData = data.sort((a, b) => b.id - a.id);
+
+        setOrders(sortedData || []);
       } catch (error) {
         console.error('Error fetching orders:', error.message);
         setOrders([]);
@@ -71,19 +74,27 @@ const Dashboard = () => {
     return products.filter((product) => product.atelier === atelier).length;
   };
 
-  // Get monthly sales data
+  // Get monthly sales data for each atelier
   const getMonthlySalesData = () => {
     const monthlySales = {};
+
     orders.forEach((order) => {
       if (order.status === 'terminée') {
         const month = new Date(order.client.deliveryDate).getMonth();
-        monthlySales[month] = (monthlySales[month] || 0) + order.total;
+        const atelier = order.atelier;
+
+        if (!monthlySales[month]) {
+          monthlySales[month] = { Courva: 0, Rayma: 0 };
+        }
+
+        monthlySales[month][atelier] += order.total;
       }
     });
 
     return Array.from({ length: 12 }, (_, i) => ({
       name: new Date(2025, i).toLocaleString('default', { month: 'short' }),
-      sales: monthlySales[i] || 0,
+      Courva: monthlySales[i]?.Courva || 0,
+      Rayma: monthlySales[i]?.Rayma || 0,
     }));
   };
 
@@ -119,7 +130,7 @@ const Dashboard = () => {
   }
 
   return (
-    <div className='p-6 bg-gray-50 min-h-screen'>
+    <div className='p-4 sm:p-6 bg-gray-50 min-h-screen'>
       <h1 className='text-2xl font-bold mb-6 text-gray-800'>Tableau de Bord</h1>
 
       {/* Overview Cards */}
@@ -152,9 +163,9 @@ const Dashboard = () => {
       </div>
 
       {/* Sales Chart */}
-      <div className='bg-white p-6 rounded-xl shadow-md mb-8 border border-gray-100'>
+      <div className='bg-white p-4 sm:p-6 rounded-xl shadow-md mb-8 border border-gray-100'>
         <h2 className='text-lg font-semibold mb-4 text-gray-700'>Ventes Mensuelles</h2>
-        <div className='w-full h-[300px]'>
+        <div className='w-full h-[150px] sm:h-[300px]'>
           <ResponsiveContainer width="100%" height="100%">
             <BarChart
               data={getMonthlySalesData()}
@@ -180,10 +191,16 @@ const Dashboard = () => {
               />
               <Legend />
               <Bar
-                dataKey="sales"
-                fill="#3b82f6"
+                dataKey="Courva"
+                fill="#4b82f6"
                 radius={[4, 4, 0, 0]}
-                name="Ventes (DA)"
+                name="Courva (DA)"
+              />
+              <Bar
+                dataKey="Rayma"
+                fill="#2fb981"
+                radius={[4, 4, 0, 0]}
+                name="Rayma (DA)"
               />
             </BarChart>
           </ResponsiveContainer>
@@ -194,7 +211,8 @@ const Dashboard = () => {
       <div className='bg-white p-6 rounded-xl shadow-md mb-8 border border-gray-100'>
         <h2 className='text-lg font-semibold mb-4 text-gray-700'>Commandes Récentes</h2>
         <div className='overflow-x-auto'>
-          <table className='w-full'>
+          {/* Desktop Table */}
+          <table className='w-full hidden sm:table'>
             <thead className='bg-gray-50'>
               <tr>
                 <th className='px-4 py-3 text-left text-sm font-semibold text-gray-600'>N° Commande</th>
@@ -236,6 +254,34 @@ const Dashboard = () => {
               ))}
             </tbody>
           </table>
+
+          {/* Mobile Cards */}
+          <div className='sm:hidden space-y-4'>
+            {recentOrders.map((order) => (
+              <div key={order.id} className='bg-white p-4 rounded-lg shadow-sm border border-gray-100'>
+                <div className='flex justify-between items-center'>
+                  <span className='text-sm font-medium text-gray-700'>N° Commande: {order.id}</span>
+                  <span
+                    className={`px-2 py-1 rounded-full text-xs font-medium ${
+                      order.status === 'terminée'
+                        ? 'bg-green-100 text-green-800'
+                        : order.status === 'en cours'
+                        ? 'bg-yellow-100 text-yellow-800'
+                        : 'bg-gray-100 text-gray-800'
+                    }`}
+                  >
+                    {order.status}
+                  </span>
+                </div>
+                <div className='mt-2 text-sm text-gray-600'>
+                  <p>{order.client.firstName} {order.client.lastName}</p>
+                  <p>{new Date(order.client.deliveryDate).toLocaleDateString()}</p>
+                  <p>{order.atelier}</p>
+                  <p className='font-medium'>{order.total.toLocaleString()} DA</p>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
         <Link
           to='/admin/orders'
@@ -249,7 +295,8 @@ const Dashboard = () => {
       <div className='bg-white p-6 rounded-xl shadow-md mb-8 border border-gray-100'>
         <h2 className='text-lg font-semibold mb-4 text-gray-700'>Produits Populaires</h2>
         <div className='overflow-x-auto'>
-          <table className='w-full'>
+          {/* Desktop Table */}
+          <table className='w-full hidden sm:table'>
             <thead className='bg-gray-50'>
               <tr>
                 <th className='px-4 py-3 text-left text-sm font-semibold text-gray-600'>Produit</th>
@@ -273,6 +320,22 @@ const Dashboard = () => {
               ))}
             </tbody>
           </table>
+
+          {/* Mobile Cards */}
+          <div className='sm:hidden space-y-4'>
+            {topProducts.map((product) => (
+              <div key={product.name} className='bg-white p-4 rounded-lg shadow-sm border border-gray-100'>
+                <div className='flex justify-between items-center'>
+                  <span className='text-sm font-medium text-gray-700'>{product.name}</span>
+                  <span className='text-sm text-gray-600'>{product.unitsSold} unités</span>
+                </div>
+                <div className='mt-2 text-sm text-gray-600'>
+                  <p>Revenu: {product.revenue.toLocaleString()} DA</p>
+                  <p>Atelier: {products.find((p) => p.name === product.name)?.atelier || 'N/A'}</p>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
 
@@ -315,4 +378,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;   
+export default Dashboard;  

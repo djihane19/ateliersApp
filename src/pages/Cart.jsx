@@ -148,7 +148,7 @@ const Cart = () => {
   const subtotal = cart.reduce((total, item) => total + (item.price * item.quantity), 0);
 
   return (
-    <div className='p-6'>
+    <div className='p-6' dir="rtl">
       <h1 className='text-3xl font-bold mb-6'>سلة التسوق</h1>
       {cartCount === 0 ? (
         <div className='text-center py-10'>

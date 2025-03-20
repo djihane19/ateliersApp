@@ -43,7 +43,7 @@ const MyOrders = () => {
 
   if (loading) {
     return (
-      <div className='text-center py-10'>
+      <div className='text-center py-10' dir="rtl">
         <div className='animate-spin rounded-full h-12 w-12 border-b-2 border-gray-900 mx-auto'></div>
         <p className='mt-4'>جاري التحميل...</p>
       </div>

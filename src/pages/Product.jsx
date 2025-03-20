@@ -32,6 +32,8 @@ const Product = () => {
   const [isEditingWidth, setIsEditingWidth] = useState(false);
   const [isEditingHeight, setIsEditingHeight] = useState(false);
   const [product, setProduct] = useState(null); // State for product
+  const [isZoomed, setIsZoomed] = useState(false); // State for zoom mode
+  const [zoomLevel, setZoomLevel] = useState(1); // State for zoom level
   const navigate = useNavigate();
 
   // Fetch product from Supabase
@@ -172,8 +174,24 @@ const Product = () => {
     }
   };
 
+  // Handle zoom in
+  const handleZoomIn = () => {
+    setZoomLevel((prev) => prev + 0.1);
+  };
+
+  // Handle zoom out
+  const handleZoomOut = () => {
+    setZoomLevel((prev) => (prev > 0.1 ? prev - 0.1 : prev));
+  };
+
+  // Handle exit zoom mode
+  const handleExitZoom = () => {
+    setIsZoomed(false);
+    setZoomLevel(1);
+  };
+
   return (
-    <div className='p-6'>
+    <div className='p-6' dir="rtl">
       <div className='flex flex-col md:flex-row gap-8'>
         {/* Product Images */}
         <div className='flex-1'>
@@ -267,7 +285,7 @@ const Product = () => {
 
           {product.height && (
             <div className='mb-4'>
-              <p className='text-sm font-medium mb-2'>الارتفاع</p>
+              <p className='text-sm font-medium mb-2'>الطول</p>
               <div className='flex items-center gap-2'>
                 <input
                   type='number'
@@ -351,13 +369,48 @@ const Product = () => {
         {showSizeGuide && (
           <div className='flex justify-center'>
             <img
-              src={assets.taille}
+              src={assets.mesure}
               alt='دليل المقاسات'
-              className='w-full max-w-md rounded-lg shadow-lg'
+              className='w-full max-w-md rounded-lg shadow-lg cursor-pointer'
+              onClick={() => setIsZoomed(true)}
             />
           </div>
         )}
       </div>
+
+      {/* Zoomed Image Modal */}
+      {isZoomed && (
+        <div className='fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center p-4 z-50'>
+          <div className='relative'>
+            <img
+              src={assets.mesure}
+              alt='دليل المقاسات'
+              style={{ transform: `scale(${zoomLevel})`, transition: 'transform 0.25s ease' }}
+              className='max-w-full max-h-full'
+            />
+            <div className='absolute top-4 right-4 flex gap-2'>
+              <button
+                onClick={handleZoomIn}
+                className='bg-white p-2 rounded-full shadow-lg'
+              >
+                +
+              </button>
+              <button
+                onClick={handleZoomOut}
+                className='bg-white p-2 rounded-full shadow-lg'
+              >
+                -
+              </button>
+              <button
+                onClick={handleExitZoom}
+                className='bg-white p-2 rounded-full shadow-lg'
+              >
+                ✕
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Order Form */}
       {showOrderForm && (
@@ -533,4 +586,4 @@ const Product = () => {
   );
 };
 
-export default Product;
+export default Product;  

@@ -8,21 +8,19 @@ const Contact = () => {
   const ateliers = {
     Courva: {
       name: 'Courva',
-      description: 'تواصل مع ورشة Courva عبر وسائل التواصل الاجتماعي للحصول على المزيد من المعلومات.',
+      description: '.تواصل مع ورشة Courva عبر وسائل التواصل الاجتماعي للحصول على المزيد من المعلومات',
       socialMedia: {
-        facebook: 'https://facebook.com/courva',
-        instagram: 'https://instagram.com/courva',
-        twitter: 'https://twitter.com/courva',
+        facebook: 'https://facebook.com/',
+        instagram: 'https://instagram.com/',
         whatsapp: 'https://wa.me/1234567890', // Replace with Courva's WhatsApp number
       },
     },
     Rayma: {
       name: 'Rayma',
-      description: 'تواصل مع ورشة Rayma عبر وسائل التواصل الاجتماعي للحصول على المزيد من المعلومات.',
+      description: '.تواصل مع ورشة Rayma عبر وسائل التواصل الاجتماعي للحصول على المزيد من المعلومات',
       socialMedia: {
-        facebook: 'https://facebook.com/rayma',
-        instagram: 'https://instagram.com/rayma',
-        twitter: 'https://twitter.com/rayma',
+        facebook: 'https://www.facebook.com/profile.php?id=61572622670217',
+        instagram: 'https://www.instagram.com/rayma.dz?igsh=NzB1cGh1bXFvMHAz',
         whatsapp: 'https://wa.me/0987654321', // Replace with Rayma's WhatsApp number
       },
     },
@@ -70,7 +68,7 @@ const Contact = () => {
         </div>
 
         {/* Atelier Name */}
-        <h1 className='text-3xl font-bold mb-6'>تواصل مع {currentAtelier.name}</h1>
+        <h1 className='text-3xl font-bold mb-6' dir="rtl">تواصل مع {currentAtelier.name}</h1>
 
         {/* Description */}
         <p className='text-gray-600 mb-6'>{currentAtelier.description}</p>
@@ -114,8 +112,8 @@ const Contact = () => {
         </div>
 
         {/* Additional Message */}
-        <p className='text-gray-600 mt-6'>
-        !يمكنك أيضًا مراسلتنا مباشرة على الواتساب للاستفسارات السريعة. نحن هنا لمساعدتك
+        <p className='text-gray-600 mt-6' dir="rtl">
+       يمكنك أيضًا مراسلتنا مباشرة على الواتساب للاستفسارات السريعة. نحن هنا لمساعدتك !
         </p>
       </div>
     </div>
