@@ -45,7 +45,9 @@ const AddEditProduct = () => {
         if (error) {
           console.error('Error fetching product:', error.message);
         } else if (data) {
-          setFormData(data);
+          // Ensure image is always an array
+          const safeData = { ...data, image: data.image || Array(6).fill(null) };
+          setFormData(safeData);
         }
       };
       fetchProduct();
@@ -60,30 +62,62 @@ const AddEditProduct = () => {
 
   // Handle image changes
   const handleImageChange = async (index, file) => {
-    const newImages = [...formData.image];
-    if (file) {
-      try {
-        const fileName = `products/${Date.now()}_${file.name}`;
-        const { data, error } = await supabase.storage
-          .from('products') // Replace with your bucket name
-          .upload(fileName, file);
-
-        if (error) {
-          throw error;
-        }
-
-        const { data: urlData } = supabase.storage
-          .from('products') // Replace with your bucket name
-          .getPublicUrl(fileName);
-
-        newImages[index] = urlData.publicUrl;
-        setFormData({ ...formData, image: newImages });
-      } catch (error) {
-        console.error('Error uploading file:', error);
-      }
-    } else {
+    if (!file) {
+      const newImages = [...formData.image];
       newImages[index] = null;
       setFormData({ ...formData, image: newImages });
+      return;
+    }
+
+    // Validate file is an image
+    if (!file.type.startsWith('image/')) {
+      alert('Please select an image file only.');
+      return;
+    }
+
+    const newImages = [...formData.image];
+    try {
+      // Generate unique filename
+      const fileExt = file.name.split('.').pop();
+      const fileName = `products/${Date.now()}_${Math.random().toString(36).substring(7)}.${fileExt}`;
+
+      // Upload to storage
+      const { data: uploadData, error: uploadError } = await supabase.storage
+        .from('products') // Ensure this bucket exists and is configured (public or with INSERT policy)
+        .upload(fileName, file, {
+          contentType: file.type, // Explicitly set content type
+          upsert: true, // Allow overwrite if exists (safer for duplicates)
+        });
+
+      if (uploadError) {
+        console.error('Upload error:', uploadError);
+        alert(`Upload failed: ${uploadError.message}. Check bucket policies or size limits (max 6MB for standard upload).`);
+        return;
+      }
+
+      // Get public URL
+      const { data: urlData } = supabase.storage
+        .from('products')
+        .getPublicUrl(fileName);
+
+      const publicUrl = urlData.publicUrl;
+      console.log(`Image uploaded successfully at index ${index}: ${publicUrl}`);
+
+      // Optional: Verify URL accessibility
+      try {
+        const response = await fetch(publicUrl, { method: 'HEAD' });
+        if (!response.ok) {
+          console.warn('Uploaded image URL may not be publicly accessible:', publicUrl);
+        }
+      } catch (verifyError) {
+        console.error('URL verification failed:', verifyError);
+      }
+
+      newImages[index] = publicUrl;
+      setFormData({ ...formData, image: newImages });
+    } catch (error) {
+      console.error('Unexpected error in image upload:', error);
+      alert('An unexpected error occurred during upload. Check console for details.');
     }
   };
 
@@ -113,13 +147,16 @@ const AddEditProduct = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      // Ensure all image uploads are complete (async wait if needed, but since handleImageChange is async, state should be updated)
+      console.log('Submitting with images:', formData.image.filter(img => img !== null));
+
       // Convert empty strings to null for numeric fields
       const productData = {
         ...formData,
         price: formData.price === '' ? null : parseFloat(formData.price), // Convert to number
         heightValue: formData.heightValue === '' ? null : parseFloat(formData.heightValue), // Convert to number
         widthValue: formData.widthValue === '' ? null : parseFloat(formData.widthValue), // Convert to number
-        image: formData.image.filter((img) => img !== null), // Remove null values from the image array
+        image: formData.image.filter((img) => img !== null && img !== ''), // Remove null/empty strings; assumes text[] column
       };
 
       if (productId) {
@@ -130,8 +167,10 @@ const AddEditProduct = () => {
           .eq('id', productId);
 
         if (error) {
+          console.error('Update error:', error);
           throw error;
         }
+        console.log('Product updated successfully');
       } else {
         // Insert new product
         const { data, error } = await supabase
@@ -140,16 +179,19 @@ const AddEditProduct = () => {
           .select();
 
         if (error) {
+          console.error('Insert error:', error);
           throw error;
         }
 
         productData.id = data[0].id; // Set the ID for the new product
+        console.log('Product inserted successfully with ID:', data[0].id);
       }
 
+      alert('Product saved successfully!');
       navigate('/admin/products'); // Redirect to the products page
     } catch (error) {
-      console.error('Error:', error);
-      alert('حدث خطأ أثناء حفظ المنتج. يرجى المحاولة مرة أخرى.');
+      console.error('Submission error:', error);
+      alert(`Error saving product: ${error.message}. Check console and table schema (image should be text[]).`);
     }
   };
 
@@ -183,7 +225,7 @@ const AddEditProduct = () => {
   const isFormValid = isHeightValid && isWidthValid;
 
   return (
-    <div className='p-6' div='rtl'>
+    <div className='p-6' dir='rtl'>
       <h1 className='text-2xl font-bold mb-6'>{productId ? 'تعديل المنتج' : 'إضافة منتج'}</h1>
       <form onSubmit={handleSubmit}>
         {/* Name and Price */}
@@ -265,15 +307,19 @@ const AddEditProduct = () => {
               <label className='block text-sm font-medium mb-1'>الصورة الرئيسية</label>
               <input
                 type='file'
+                accept='image/*'
                 onChange={(e) => handleImageChange(0, e.target.files[0])}
                 className='w-full p-2 border rounded-lg'
               />
-              {formData.image[0] && (
+              {formData.image[0] ? (
                 <img
                   src={formData.image[0]}
                   alt="Main"
                   className="w-16 h-16 object-cover mt-2"
+                  onError={(e) => console.error('Failed to load main image:', e)}
                 />
+              ) : (
+                <img src={placeholderImage} alt="Placeholder" className="w-16 h-16 object-cover mt-2 opacity-50" />
               )}
             </div>
             {/* Additional Images */}
@@ -282,15 +328,19 @@ const AddEditProduct = () => {
                 <label className='block text-sm font-medium mb-1'>صورة إضافية {index}</label>
                 <input
                   type='file'
+                  accept='image/*'
                   onChange={(e) => handleImageChange(index, e.target.files[0])}
                   className='w-full p-2 border rounded-lg'
                 />
-                {formData.image[index] && (
+                {formData.image[index] ? (
                   <img
                     src={formData.image[index]}
                     alt={`Additional ${index}`}
                     className="w-16 h-16 object-cover mt-2"
+                    onError={(e) => console.error(`Failed to load additional image ${index}:`, e)}
                   />
+                ) : (
+                  <img src={placeholderImage} alt="Placeholder" className="w-16 h-16 object-cover mt-2 opacity-50" />
                 )}
               </div>
             ))}
@@ -454,4 +504,4 @@ const AddEditProduct = () => {
   );
 };
 
-export default AddEditProduct; 
+export default AddEditProduct;

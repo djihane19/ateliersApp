@@ -16,9 +16,14 @@ import menu from './menu.png'
 import dropdown from './dropdown.png'
 import taille from './taille.jpg'
 import mesure from './mesure.png'
-
+import courva1 from './courva1.jpg'
+import courva2 from './courva2.jpeg'
+import courva3 from './courva3.jpg'
 export const assets ={
-    mesure,
+    courva1,
+    courva2,
+    courva3,
+    mesure,  
     taille,
     logo1,
     user,

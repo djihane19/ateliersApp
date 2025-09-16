@@ -26,7 +26,7 @@ const Hero = () => {
         fr: "Performance et Style pour une Vie Active",
         ar: "الأداء والأناقة لحياة نشطة"
       },
-      photos: [assets.img4, assets.img5, assets.img6] // Remplacez par vos images
+      photos: [assets.courva1, assets.courva2, assets.courva3] // Remplacez par vos images
     }
   ];
 
